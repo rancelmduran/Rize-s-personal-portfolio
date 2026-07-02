@@ -89,13 +89,14 @@ strong { color: var(--text); font-weight: 600; }
 /* ── NAVBAR ── */
 #navbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  transition: background var(--transition), border-color var(--transition);
-  border-bottom: 1px solid transparent;
+  background: var(--beige);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow var(--transition);
 }
 #navbar.scrolled {
-  background: rgba(245,240,232,0.92);
+  background: rgba(245,240,232,0.96);
   backdrop-filter: blur(20px);
-  border-bottom-color: var(--border);
+  box-shadow: 0 2px 12px rgba(74,103,65,0.08);
 }
 .nav-container {
   max-width: 1160px; margin: 0 auto; padding: 0 2rem;
