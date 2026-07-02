@@ -75,7 +75,7 @@
           <div class="photo-frame">
             <div class="photo-circle">
               <img src="assets/images/profile.jpg" alt="Rancel M. Duran" loading="eager" onerror="this.style.display='none'" />
-              <div class="photo-initials" aria-hidden="true"></div>
+              <div class="photo-initials" aria-hidden="true">RD</div>
             </div>
             <div class="photo-ring" aria-hidden="true"></div>
             <div class="photo-dot photo-dot-1" aria-hidden="true"></div>
@@ -122,8 +122,8 @@
             <div class="stat-divider" aria-hidden="true"></div>
             <div class="stat-item">
               <div class="stat-number-wrap">
-                <span class="stat-number" data-target="1">0</span>
-                <span class="stat-plus"></span>
+                <span class="stat-number" data-target="5">0</span>
+                <span class="stat-plus">+</span>
               </div>
               <span class="stat-label">Projects Completed</span>
             </div>
@@ -137,7 +137,7 @@
             <div class="stat-divider" aria-hidden="true"></div>
             <div class="stat-item">
               <div class="stat-number-wrap">
-                <span class="stat-number" data-target="4">0</span>
+                <span class="stat-number" data-target="10">0</span>
                 <span class="stat-plus">+</span>
               </div>
               <span class="stat-label">Technologies</span>
@@ -477,11 +477,9 @@
           </div>
 
           <div class="contact-right fade-right">
-            <form id="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate aria-label="Contact form">
+            <form id="contact-form" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" novalidate aria-label="Contact form">
               <input type="hidden" name="form-name" value="contact" />
-              <p class="visually-hidden">
-                <label>Do not fill: <input name="bot-field" tabindex="-1" /></label>
-              </p>
+              <input type="hidden" name="bot-field" class="visually-hidden" tabindex="-1" />
               <div class="form-row">
                 <div class="form-group">
                   <label for="name" class="form-label">Name</label>
