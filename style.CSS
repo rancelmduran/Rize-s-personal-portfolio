@@ -136,7 +136,7 @@ strong { color: var(--text); font-weight: 600; }
   min-height: 100vh; display: flex; flex-direction: column;
   justify-content: center; position: relative; overflow: hidden;
   padding: 8rem 2rem 5rem;
-  background: var(--off-white);
+  background: linear-gradient(160deg, var(--sage) 0%, var(--sage-dark) 100%);
 }
 .hero-bg-lines {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
@@ -144,7 +144,7 @@ strong { color: var(--text); font-weight: 600; }
 }
 .hero-bg-lines span {
   display: block; width: 1px;
-  background: linear-gradient(to bottom, transparent, var(--border) 30%, var(--border) 70%, transparent);
+  background: linear-gradient(to bottom, transparent, rgba(250,248,244,0.18) 30%, rgba(250,248,244,0.18) 70%, transparent);
 }
 .hero-container {
   position: relative; z-index: 1; max-width: 1160px;
@@ -153,30 +153,34 @@ strong { color: var(--text); font-weight: 600; }
 }
 .hero-eyebrow {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.82rem; color: var(--sage);
+  font-size: 0.82rem; color: var(--beige-dark);
   letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.25rem;
 }
 .hero-name {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(3rem, 6vw, 5rem); font-weight: 300;
-  line-height: 1.1; color: var(--text); margin-bottom: 1.5rem;
+  line-height: 1.1; color: var(--off-white); margin-bottom: 1.5rem;
 }
-.hero-name em { font-style: italic; color: var(--sage); font-weight: 400; }
+.hero-name em { font-style: italic; color: var(--beige-dark); font-weight: 400; }
 .hero-tagline {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; min-height: 1.5em;
+  font-size: 0.9rem; color: rgba(250,248,244,0.75); margin-bottom: 1.5rem; min-height: 1.5em;
 }
 .cursor-blink { animation: blink 0.9s step-end infinite; }
 @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
-.hero-bio { color: var(--text-muted); font-size: 0.97rem; max-width: 440px; margin-bottom: 2.5rem; }
+.hero-bio { color: rgba(250,248,244,0.72); font-size: 0.97rem; max-width: 440px; margin-bottom: 2.5rem; }
 .hero-cta { display: flex; gap: 1rem; }
+.hero-cta .btn-primary { background: var(--off-white); color: var(--sage-dark); }
+.hero-cta .btn-primary:hover { background: var(--beige-dark); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+.hero-cta .btn-ghost { border-color: rgba(250,248,244,0.4); color: var(--off-white); }
+.hero-cta .btn-ghost:hover { background: rgba(250,248,244,0.1); }
 
 /* Photo */
 .hero-right { display: flex; justify-content: center; align-items: center; }
 .photo-frame { position: relative; width: 340px; height: 340px; }
 .photo-circle {
   width: 100%; height: 100%; border-radius: 50%;
-  overflow: hidden; border: 2px solid var(--sage-light);
+  overflow: hidden; border: 2px solid var(--off-white);
   background: var(--beige-mid);
   display: flex; align-items: center; justify-content: center;
   position: relative; z-index: 2;
@@ -190,13 +194,13 @@ strong { color: var(--text); font-weight: 600; }
 }
 .photo-ring {
   position: absolute; inset: -16px; border-radius: 50%;
-  border: 1px dashed var(--border);
+  border: 1px dashed rgba(250,248,244,0.35);
   animation: spin 25s linear infinite; z-index: 1;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 .photo-dot {
   position: absolute; border-radius: 50%; z-index: 3;
-  background: var(--sage);
+  background: var(--off-white);
 }
 .photo-dot-1 { width: 10px; height: 10px; top: 10%; right: 5%; animation: floatDot 3s ease-in-out infinite; }
 .photo-dot-2 { width: 6px; height: 6px; bottom: 15%; left: 2%; animation: floatDot 4s ease-in-out infinite reverse; }
@@ -206,12 +210,12 @@ strong { color: var(--text); font-weight: 600; }
 .scroll-hint {
   position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
-  color: var(--text-muted); font-family: 'JetBrains Mono', monospace;
+  color: rgba(250,248,244,0.7); font-family: 'JetBrains Mono', monospace;
   font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; z-index: 1;
 }
 .scroll-line {
   width: 1px; height: 48px;
-  background: linear-gradient(to bottom, transparent, var(--sage));
+  background: linear-gradient(to bottom, transparent, var(--off-white));
   animation: scrollLine 1.6s ease-in-out infinite;
 }
 @keyframes scrollLine { 0%,100% { opacity: 0.3; transform: scaleY(0.6); } 50% { opacity: 1; transform: scaleY(1); } }
