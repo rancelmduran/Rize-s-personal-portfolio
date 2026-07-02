@@ -586,3 +586,9 @@ section:nth-child(even) { background: var(--beige-mid); }
   .section-header { flex-wrap: wrap; gap: 0.75rem; }
   .section-line { display: none; }
 }
+
+/* ── PARALLAX ── */
+[data-parallax] { will-change: transform; }
+@media (prefers-reduced-motion: reduce) {
+  [data-parallax] { transform: none !important; }
+}

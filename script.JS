@@ -182,3 +182,34 @@ if (form) {
     }
   });
 }
+
+/* ── PARALLAX ── */
+const parallaxEls = document.querySelectorAll('[data-parallax]');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let parallaxTicking = false;
+
+function updateParallax() {
+  const scrollY = window.scrollY;
+  const viewportCenter = scrollY + window.innerHeight / 2;
+  parallaxEls.forEach(el => {
+    const speed = parseFloat(el.dataset.parallax) || 0.15;
+    const rect = el.getBoundingClientRect();
+    const elCenter = rect.top + scrollY + rect.height / 2;
+    const offset = (viewportCenter - elCenter) * speed;
+    el.style.transform = `translateY(${offset}px)`;
+  });
+  parallaxTicking = false;
+}
+
+function requestParallaxTick() {
+  if (!parallaxTicking) {
+    requestAnimationFrame(updateParallax);
+    parallaxTicking = true;
+  }
+}
+
+if (!prefersReducedMotion && parallaxEls.length) {
+  window.addEventListener('scroll', requestParallaxTick, { passive: true });
+  window.addEventListener('resize', requestParallaxTick, { passive: true });
+  updateParallax();
+}
