@@ -449,12 +449,80 @@ section:nth-child(even) { background: var(--beige-mid); }
 .stack-pill:hover { color: var(--sage); }
 
 /* ── CERTIFICATIONS ── */
-.cert-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
-.cert-card { padding: 2rem; display: flex; gap: 1.25rem; align-items: flex-start; }
-.cert-icon { font-size: 1.75rem; flex-shrink: 0; }
-.cert-name { font-weight: 600; color: var(--text); margin-bottom: 0.3rem; font-size: 0.95rem; }
-.cert-org { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 0.6rem; }
-.cert-year {
+.cert-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.75rem; }
+
+.cert-card-premium {
+  background: var(--off-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+.cert-card-premium:hover,
+.cert-card-premium:focus-within {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(88,129,87,0.35);
+}
+
+.cert-thumb {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+  background: var(--beige-mid);
+  display: flex; align-items: center; justify-content: center;
+}
+.cert-thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.cert-card-premium:hover .cert-thumb img,
+.cert-card-premium:focus-within .cert-thumb img { transform: scale(1.08); }
+
+.cert-thumb-fallback {
+  display: none;
+  position: absolute; inset: 0;
+  align-items: center; justify-content: center;
+  font-size: 3rem; color: var(--sage); opacity: 0.55;
+}
+
+.cert-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(47,62,70,0) 40%, rgba(47,62,70,0.78) 100%);
+  display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 1.25rem;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.cert-card-premium:hover .cert-overlay,
+.cert-card-premium:focus-within .cert-overlay { opacity: 1; }
+
+.cert-view-btn {
+  background: var(--off-white); color: var(--sage-dark);
+  border: none; padding: 0.55rem 1.4rem; border-radius: 2px;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer;
+  transform: translateY(10px); opacity: 0;
+  transition: transform var(--transition) 0.05s, opacity var(--transition) 0.05s, background var(--transition), color var(--transition);
+}
+.cert-card-premium:hover .cert-view-btn,
+.cert-card-premium:focus-within .cert-view-btn { transform: translateY(0); opacity: 1; }
+.cert-view-btn:hover, .cert-view-btn:focus-visible { background: var(--sage); color: var(--off-white); }
+
+.cert-body-premium { padding: 1.5rem 1.5rem 1.75rem; }
+.cert-verified-badge {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  background: var(--faint); color: var(--sage);
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.25rem 0.65rem; border-radius: 99px;
+  margin-bottom: 0.9rem;
+}
+.cert-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem;
+}
+.cert-issuer { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 0.9rem; }
+.cert-year-tag {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.72rem; color: var(--sage); letter-spacing: 0.1em;
   border: 1px solid var(--border); padding: 0.2rem 0.6rem; border-radius: 2px;
@@ -591,4 +659,75 @@ section:nth-child(even) { background: var(--beige-mid); }
 [data-parallax] { will-change: transform; }
 @media (prefers-reduced-motion: reduce) {
   [data-parallax] { transform: none !important; }
+}
+
+/* ── CONTACT FORM CARD (fix: form inputs were blending into section bg) ── */
+.contact-form-card {
+  background: var(--off-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.25rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 480px) {
+  .contact-form-card { padding: 1.5rem; }
+}
+
+/* ── CERTIFICATE MODAL ── */
+.cert-modal {
+  position: fixed; inset: 0; z-index: 2000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 2rem;
+  visibility: hidden; opacity: 0;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.cert-modal.open { visibility: visible; opacity: 1; }
+.cert-modal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(47,62,70,0.72);
+  backdrop-filter: blur(10px);
+}
+.cert-modal-dialog {
+  position: relative; z-index: 1;
+  background: var(--off-white);
+  border-radius: var(--radius);
+  max-width: 640px; width: 100%;
+  max-height: 88vh; overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  transform: scale(0.92) translateY(12px);
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
+}
+.cert-modal.open .cert-modal-dialog { transform: scale(1) translateY(0); opacity: 1; }
+.cert-modal-close {
+  position: absolute; top: 0.85rem; right: 0.85rem; z-index: 2;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--off-white); color: var(--text);
+  border: 1px solid var(--border);
+  font-size: 0.95rem; display: flex; align-items: center; justify-content: center;
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+}
+.cert-modal-close:hover { background: var(--sage); color: var(--off-white); transform: rotate(90deg); }
+.cert-modal-media {
+  position: relative; width: 100%; min-height: 220px;
+  background: var(--beige-mid);
+  display: flex; align-items: center; justify-content: center;
+}
+.cert-modal-media img { width: 100%; height: auto; display: block; }
+.cert-modal-fallback {
+  display: none;
+  align-items: center; justify-content: center;
+  font-size: 4rem; color: var(--sage); opacity: 0.5;
+  width: 100%; height: 260px;
+}
+.cert-modal-info { padding: 1.5rem 1.75rem 1.75rem; }
+.cert-modal-info h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem;
+}
+.cert-modal-info p { color: var(--text-muted); font-size: 0.88rem; }
+@media (max-width: 480px) {
+  .cert-modal { padding: 1rem; }
+  .cert-modal-info { padding: 1.25rem; }
 }

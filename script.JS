@@ -1,6 +1,6 @@
 /* ================================================
    RANCEL M. DURAN – PORTFOLIO
-   script.js — Beige + Sage Green Edition
+   script.js — Ivory + Sand + Sage + Forest Green + Deep Slate Edition
    ================================================ */
 
 'use strict';
@@ -213,3 +213,62 @@ if (!prefersReducedMotion && parallaxEls.length) {
   window.addEventListener('resize', requestParallaxTick, { passive: true });
   updateParallax();
 }
+
+/* ── CERTIFICATE MODAL ──
+   Appended cleanly; does not touch any code above.
+   Opens a lightbox for each .cert-view-btn with fade+scale animation,
+   closes on ESC, backdrop click, or the close button. */
+(function () {
+  const modal     = document.getElementById('cert-modal');
+  if (!modal) return;
+
+  const backdrop  = document.getElementById('cert-modal-backdrop');
+  const closeBtn  = document.getElementById('cert-modal-close');
+  const imgEl     = document.getElementById('cert-modal-img');
+  const fallbackEl = document.getElementById('cert-modal-fallback');
+  const titleEl   = document.getElementById('cert-modal-title');
+  const issuerEl  = document.getElementById('cert-modal-issuer');
+  const viewBtns  = document.querySelectorAll('.cert-view-btn');
+
+  let lastFocused = null;
+
+  function openModal(btn) {
+    const src    = btn.dataset.certImg || '';
+    const title  = btn.dataset.certTitle || '';
+    const issuer = btn.dataset.certIssuer || '';
+
+    lastFocused = document.activeElement;
+
+    imgEl.style.display = '';
+    fallbackEl.style.display = 'none';
+    imgEl.onerror = () => {
+      imgEl.style.display = 'none';
+      fallbackEl.style.display = 'flex';
+    };
+    imgEl.src = src;
+    imgEl.alt = title ? `${title} certificate` : 'Certificate preview';
+
+    titleEl.textContent = title;
+    issuerEl.textContent = issuer;
+
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  }
+
+  viewBtns.forEach(btn => btn.addEventListener('click', () => openModal(btn)));
+  if (backdrop) backdrop.addEventListener('click', closeModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+})();
