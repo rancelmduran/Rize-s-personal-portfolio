@@ -551,7 +551,7 @@ section:nth-child(even) { background: var(--beige-mid); }
 }
 .form-input, .form-textarea {
   width: 100%; padding: 0.85rem 1rem;
-  background: var(--beige-mid); border: 1px solid var(--border);
+  background: var(--off-white); border: 1px solid var(--border);
   border-radius: var(--radius-sm); color: var(--text);
   font-family: inherit; font-size: 0.9rem; outline: none;
   transition: border-color var(--transition), box-shadow var(--transition);
@@ -661,17 +661,11 @@ section:nth-child(even) { background: var(--beige-mid); }
   [data-parallax] { transform: none !important; }
 }
 
-/* ── CONTACT FORM CARD (fix: form inputs were blending into section bg) ── */
+/* ── CONTACT FORM WRAPPER ── */
+/* No boxed background here on purpose — the input fields themselves
+   are the "white box" element, this is just a plain wrapper. */
 .contact-form-card {
-  background: var(--off-white);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 2.25rem;
-  box-shadow: var(--shadow);
   margin-bottom: 1.5rem;
-}
-@media (max-width: 480px) {
-  .contact-form-card { padding: 1.5rem; }
 }
 
 /* ── CERTIFICATE MODAL ── */
