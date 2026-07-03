@@ -496,7 +496,6 @@ section:nth-child(even) { background: var(--beige-mid); }
 }
 .cert-card-premium:hover .cert-overlay,
 .cert-card-premium:focus-within .cert-overlay { opacity: 1; }
-
 .cert-view-btn {
   background: var(--off-white); color: var(--sage-dark);
   border: none; padding: 0.55rem 1.4rem; border-radius: 2px;
@@ -508,6 +507,13 @@ section:nth-child(even) { background: var(--beige-mid); }
 .cert-card-premium:hover .cert-view-btn,
 .cert-card-premium:focus-within .cert-view-btn { transform: translateY(0); opacity: 1; }
 .cert-view-btn:hover, .cert-view-btn:focus-visible { background: var(--sage); color: var(--off-white); }
+
+/* Touch devices have no real :hover — keep the overlay/button
+   permanently visible there instead of hiding functionality. */
+@media (hover: none) {
+  .cert-overlay { opacity: 1; }
+  .cert-view-btn { opacity: 1; transform: translateY(0); }
+}
 
 .cert-body-premium { padding: 1.5rem 1.5rem 1.75rem; }
 .cert-verified-badge {
@@ -622,6 +628,7 @@ section:nth-child(even) { background: var(--beige-mid); }
   .capstone-visual { display: none; }
   .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
   .exp-list { grid-template-columns: 1fr; }
+  .cert-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
   section { padding: 5rem 0; }
