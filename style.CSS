@@ -602,6 +602,7 @@ section:nth-child(even) { background: var(--beige-mid); }
   font-size: 1rem; font-weight: 700;
   opacity: 0; transform: translateY(16px);
   transition: all var(--transition); pointer-events: none; z-index: 500;
+  border-radius: 50%;
 }
 #scroll-top.visible { opacity: 1; transform: none; pointer-events: auto; }
 #scroll-top:hover { background: var(--sage-dark); transform: translateY(-3px); }
